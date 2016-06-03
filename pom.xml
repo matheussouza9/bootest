@@ -96,7 +96,7 @@
 					<password>postgres</password>
 					<baselineOnMigrate>true</baselineOnMigrate>
 					<!-- Parametros Default - https://flywaydb.org/documentation/maven/migrate -->
-			    </configuration>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
