@@ -91,7 +91,7 @@
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
 				<configuration>
-					<url>jdbc:postgresql://localhost:5432/boot_contatos</url>
+					<url>jdbc:postgresql://localhost:5432/boot_contacts</url>
 					<user>postgres</user>
 					<password>postgres</password>
 					<baselineOnMigrate>true</baselineOnMigrate>
