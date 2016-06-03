@@ -26,44 +26,44 @@ public class ContactController {
 	private static final String TEMPLATE_LIST = "contact/list";
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-    public String getContacts(Model model) {
+	public String getContacts(Model model) {
 		List<Contact> contactsList = contactService.list();
 		model.addAttribute("contactsList", contactsList);
-        return TEMPLATE_LIST;
+		return TEMPLATE_LIST;
     }
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String addContact(Model model) {
+	public String addContact(Model model) {
 		model.addAttribute("contact", new Contact());
 		model.addAttribute("pageName", "Add new contact");
-        return TEMPLATE_ADD_OR_EDIT;
-    }
+		return TEMPLATE_ADD_OR_EDIT;
+	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addContact(@Valid Contact contact, BindingResult result) {
+	public String addContact(@Valid Contact contact, BindingResult result) {
 		if(result.hasErrors())
 			return TEMPLATE_ADD_OR_EDIT;
 
 		contactService.addOrUpdate(contact);
-        return "redirect:/c";
-    }
+		return "redirect:/c";
+	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String editContact(@PathVariable Integer id, Model model) {
+	public String editContact(@PathVariable Integer id, Model model) {
 		Contact contact = contactService.get(id);
-		
+
 		if(null != contact){
 			model.addAttribute("contact", contact);
 			model.addAttribute("pageName", "Edit a contact");
 			return TEMPLATE_ADD_OR_EDIT;
 		}
-		
+
 		return "redirect:/c";
-    }
-	
+	}
+
 	@RequestMapping(value = "/rm/{id}", method = RequestMethod.GET)
-    public String removeContact(@PathVariable Integer id, Model model) {
+	public String removeContact(@PathVariable Integer id, Model model) {
 		contactService.delete(id);
 		return "redirect:/c";
-    }
+	}
 }
