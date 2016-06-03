@@ -30,7 +30,7 @@ public class ContactController {
 		List<Contact> contactsList = contactService.list();
 		model.addAttribute("contactsList", contactsList);
 		return TEMPLATE_LIST;
-    }
+	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addContact(Model model) {
