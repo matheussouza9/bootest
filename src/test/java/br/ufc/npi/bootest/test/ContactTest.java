@@ -13,22 +13,22 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.WebApplicationContext;
 
+import br.ufc.npi.bootest.controller.ContactController;
 import br.ufc.npi.bootest.model.Contact;
 import br.ufc.npi.bootest.service.ContactService;
 
 public class ContactTest extends GenericTest {
-
-	@Autowired
-	private WebApplicationContext context;
+	
+	@InjectMocks
+    private ContactController contactController;
 	
 	@Mock
 	private ContactService contactService;
@@ -38,7 +38,7 @@ public class ContactTest extends GenericTest {
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
+		this.mockMvc = MockMvcBuilders.standaloneSetup(contactController).build();
 	}
 
 	@Test
@@ -80,10 +80,10 @@ public class ContactTest extends GenericTest {
 
 		Mockito.when(contactService.get(13)).thenReturn(contact);
 
-		mockMvc.perform(get("/c/rm/13"))
-		.andExpect(status().isFound())
-		//.andExpect(flash().attribute("alertSuccess", "Take out the garbage successfully completed"))
-		.andExpect(redirectedUrl("/c"));
+		mockMvc
+			.perform(get("/c/rm/13"))
+			.andExpect(status().isFound())
+			.andExpect(redirectedUrl("/c"));
 
 		Mockito.verify(contactService, Mockito.times(0)).get(13);
 	}
