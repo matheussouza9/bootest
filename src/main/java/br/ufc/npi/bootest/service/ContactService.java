@@ -33,10 +33,10 @@ public class ContactService {
 	}
 
 	public List<Contact> getByName(String name) {
-		return contactRepository.findByName(name);
+		return contactRepository.findContactsByName(name);
 	}
 
 	public Contact getByPhoneNumber(String phoneNumber) {
-		return contactRepository.findByPhoneNumber(phoneNumber);
+		return contactRepository.findContactByPhoneNumber(phoneNumber);
 	}
 }

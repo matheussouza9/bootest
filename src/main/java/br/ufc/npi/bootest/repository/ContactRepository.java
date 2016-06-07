@@ -12,6 +12,6 @@ import br.ufc.npi.bootest.model.Contact;
 @Repository
 @Transactional
 public interface ContactRepository extends CrudRepository<Contact, Integer> {
-	public List<Contact> findByName(String name);
-	public Contact findByPhoneNumber(String phoneNumber);
+	public List<Contact> findContactsByName(String name);
+	public Contact findContactByPhoneNumber(String phoneNumber);
 }

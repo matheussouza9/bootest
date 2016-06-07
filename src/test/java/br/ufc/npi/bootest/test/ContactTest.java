@@ -60,16 +60,13 @@ public class ContactTest extends GenericTest {
 		contact.setName("Matheus");
 		contact.setPhoneNumber("988776655");
 		
-		Mockito.when(contactService.getByPhoneNumber("988776655")).thenReturn(contact);
-		
 		mockMvc
 			.perform(post("/c/add")
-				.param("nome", contact.getName())
-				.param("telefone", contact.getPhoneNumber())
+				.param("name", contact.getName())
+				.param("phoneNumber", contact.getPhoneNumber())
 			)
 			.andExpect(redirectedUrl("/c"));
 
-		Mockito.verify(contactService, Mockito.times(1)).getByPhoneNumber(contact.getPhoneNumber());
 	}
 
 	@Test
