@@ -56,32 +56,19 @@ public class ContactTest extends GenericTest {
 	@Test
 	@Transactional
 	public void add() throws Exception {
-		Contact contact = new Contact();
-		contact.setName("Matheus");
-		contact.setPhoneNumber("988776655");
-		
 		mockMvc
 			.perform(post("/c/add")
-				.param("name", contact.getName())
-				.param("phoneNumber", contact.getPhoneNumber())
+				.param("name", "Matheus")
+				.param("phoneNumber", "988776655")
 			)
 			.andExpect(redirectedUrl("/c"));
-
 	}
 
 	@Test
 	public void delete() throws Exception {
-		Contact contact = new Contact();
-		contact.setName("Matheus");
-		contact.setPhoneNumber("988776655");
-
-		Mockito.when(contactService.get(13)).thenReturn(contact);
-
 		mockMvc
 			.perform(get("/c/rm/13"))
 			.andExpect(status().isFound())
 			.andExpect(redirectedUrl("/c"));
-
-		Mockito.verify(contactService, Mockito.times(0)).get(13);
 	}
 }
