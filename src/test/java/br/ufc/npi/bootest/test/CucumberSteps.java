@@ -10,27 +10,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
-import br.ufc.npi.bootest.BootestApplication;
 import br.ufc.npi.bootest.controller.ContactController;
 import br.ufc.npi.bootest.model.Contact;
 import br.ufc.npi.bootest.service.ContactService;
+import cucumber.api.java.Before;
 import cucumber.api.java.pt.Dado;
-import cucumber.api.java.pt.Quando;
 import cucumber.api.java.pt.Entao;
+import cucumber.api.java.pt.Quando;
 
 
 public class CucumberSteps {
@@ -44,7 +37,7 @@ public class CucumberSteps {
 	private MockMvc mockMvc;
 	private Contact contact;
 
-	@cucumber.api.java.Before
+	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		this.mockMvc = MockMvcBuilders.standaloneSetup(contactController).build();
