@@ -3,7 +3,6 @@
   <head>
     <title>My contacts</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet" />
   </head>
 
   <body class="container">
@@ -23,7 +22,7 @@
           
           <tbody th:case="${true}">
             <tr th:each="contact : ${contactsList}">
-              <td><a th:text="${contact.id}" th:href="@{'/c/edit/' + ${contact.id}}" title="Edit"></a></td>
+              <td th:text="${contact.id}"></td>
               <td th:text="${contact.name}"></td>
               <td th:text="${contact.phoneNumber}"></td>
               <td><a class="btn btn-xs btn-danger" th:href="@{'/c/rm/' + ${contact.id}}">Delete</a></td>
@@ -34,8 +33,5 @@
     </div> <!-- .row -->
 
     <a th:href="@{/c/add}" class="btn btn-success">Add</a>
-
-    <script th:src="@{/webjars/jquery/2.2.4/jquery.min.js}" type="text/javascript"></script>
-    <script th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}" type="text/javascript"></script>
   </body>
 </html>

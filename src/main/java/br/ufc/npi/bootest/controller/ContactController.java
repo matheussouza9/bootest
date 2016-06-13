@@ -47,19 +47,6 @@ public class ContactController {
 		contactService.addOrUpdate(contact);
 		return "redirect:/c";
 	}
-	
-	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-	public String editContact(@PathVariable Integer id, Model model) {
-		Contact contact = contactService.get(id);
-
-		if(null != contact){
-			model.addAttribute("contact", contact);
-			model.addAttribute("pageName", "Edit a contact");
-			return TEMPLATE_ADD_OR_EDIT;
-		}
-
-		return "redirect:/c";
-	}
 
 	@RequestMapping(value = "/rm/{id}", method = RequestMethod.GET)
 	public String removeContact(@PathVariable Integer id, Model model) {
