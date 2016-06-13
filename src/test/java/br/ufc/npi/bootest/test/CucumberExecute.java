@@ -12,6 +12,6 @@ import br.ufc.npi.bootest.BootestApplication;
 @RunWith(Cucumber.class)
 @SpringApplicationConfiguration(classes = BootestApplication.class)
 @WebAppConfiguration
-@CucumberOptions (features = "classpath:features")
+@CucumberOptions (features = "classpath:features",glue={"br.ufc.npi.bootest.test"})
 public class CucumberExecute {
 }

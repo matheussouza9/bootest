@@ -10,27 +10,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.runner.RunWith;
+import org.junit.Assert;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
-import br.ufc.npi.bootest.BootestApplication;
 import br.ufc.npi.bootest.controller.ContactController;
 import br.ufc.npi.bootest.model.Contact;
 import br.ufc.npi.bootest.service.ContactService;
 import cucumber.api.java.pt.Dado;
-import cucumber.api.java.pt.Quando;
 import cucumber.api.java.pt.Entao;
+import cucumber.api.java.pt.Quando;
 
 
 public class CucumberSteps {
@@ -43,7 +39,7 @@ public class CucumberSteps {
 	
 	private MockMvc mockMvc;
 	private Contact contact;
-
+	private WebDriver drive;
 	@cucumber.api.java.Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
@@ -115,4 +111,23 @@ public class CucumberSteps {
 		Mockito.verify(contactService, Mockito.times(0)).get(13);
     }
 	
+	
+	@Dado("^Abri o firefox e estou na tela de adicionar contato$")
+	public void abri_firefox_na_tela_adicionar_contato() throws Throwable {
+			drive = new FirefoxDriver();
+			drive.manage().window().maximize();
+			drive.get("http://localhost:8080/bootest/c/add");
+		}
+
+	@Quando("^eu adicionar nome (.*) e telefone (.*)$")
+	public void adiciono_um_contato_valido(String nome, String telefone) throws Throwable {
+		drive.findElement(By.id("name")).sendKeys(nome);
+		drive.findElement(By.id("phoneNumber")).sendKeys(telefone);
+	}
+
+	@Entao("^o usuario devera ser redirecionado para a tela principal$")
+	public void tela_principal_mostrada_para_o_usuario() throws Throwable {
+		drive.findElement(By.id("save")).click();
+		Assert.assertEquals("http://localhost:8080/bootest/c", drive.getCurrentUrl());
+	}
 }

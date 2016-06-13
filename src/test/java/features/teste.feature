@@ -10,4 +10,9 @@
 	    Dado eu estou na tela inicial
 	    Quando removo um contato com nome Matheus e telefone 988776655
 	    Entao o contato é removido da lista
+	  
+	  Cenario: Cadastro de contato no firefox
+	    Dado Abri o firefox e estou na tela de adicionar contato
+	    Quando eu adicionar nome Matheus e telefone 988776655
+	    Entao o usuario devera ser redirecionado para a tela principal
 		      
