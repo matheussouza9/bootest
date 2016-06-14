@@ -60,8 +60,11 @@ public class ContactTest extends GenericTest {
 			.perform(post("/c/add")
 				.param("name", "Matheus")
 				.param("phoneNumber", "988776655")
+
 			)
 			.andExpect(redirectedUrl("/c"));
+
+		//Mockito.verify(contactService, Mockito.times(1)).getByPhoneNumber(contact.getPhoneNumber());
 	}
 
 	@Test

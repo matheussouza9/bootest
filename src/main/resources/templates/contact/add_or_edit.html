@@ -11,25 +11,18 @@
     <form action="#" th:action="@{/c/add}" th:object="${contact}" method="post">
       <input type="hidden" th:field="*{id}" />
 
-      <div class="form-group" th:attrappend="class=${#fields.hasErrors('name') ? ' has-error' : ''}">
-        <label class="control-label" for="name">Name</label>
-        <input id="name" class="form-control" type="text" th:field="*{name}" aria-describedby="helpBlockName" />
-        <span id="helpBlockName" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="help-block"></span>
-      </div>
+      <label for="name">Name</label>
+      <input id="name" type="text" th:field="*{name}"/>
+      <span id="helpBlockName" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
 
-      <div class="form-group" th:attrappend="class=${#fields.hasErrors('phoneNumber') ? ' has-error' : ''}">
-        <label class="control-label" for="phoneNumber">Phone number</label>
-        <input id="phoneNumber" class="form-control" type="text" th:field="*{phoneNumber}" aria-describedby="helpBlockPhoneNumber"/>
-        <span id="helpBlockPhoneNumber" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="help-block"></span>
-      </div>
+      <label for="phoneNumber">Phone number</label>
+      <input id="phoneNumber" type="text" th:field="*{phoneNumber}"/>
+      <span id="helpBlockPhoneNumber" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+      
+      <input id="save" type="submit" value="Save" />
+      <input type="reset" value="Reset fields" />
 
-      <input class="btn btn-success" type="submit" value="Save" />
-      <input class="btn btn-default" type="reset" value="Reset fields" />
-
-      <a th:href="@{/c}" class="btn btn-default">
-        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-        Back to list
-      </a>
+      <a th:href="@{/c}">Back to list</a>
     </form>
   </body>
 </html>
